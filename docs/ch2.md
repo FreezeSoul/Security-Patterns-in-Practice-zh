@@ -12,7 +12,7 @@ A security pattern describes a solution to the problem of controlling (stopping 
 
 Figure 2.1 shows a generic diagram illustrating the effect of the use of security patterns as deployed in a specific architecture. The sequence diagrams on the left of the figure indicate possible attacks (threats) to a context defined by a deployment diagram. For example, a context may include distributed systems, distributed systems using web services, or operating systems. Typical objects in the deployment diagram (O1, O2, O3) are instantiated from classes in the application class diagram (Classes A, B and C respectively for this example). SP1 denotes the security pattern solution that is able to stop or mitigate these threats. There may be more than one SP1 that can handle the threats. Theoretical models of security patterns can be found in [Was09] and in Chapter 8 of [Sch03].
 
-Figure 2.1: A security pattern controlling two attacks
+<Figures figure="2-1">A security pattern controlling two attacks</Figures>
 
 ## 2.2 The Nature of Security Patterns
 
@@ -98,7 +98,7 @@ The solution section describes the idea of the pattern. A descriptive figure may
 
 A Packet Filter Firewall intercepts all traffic coming/going from a port P and inspects its packets (Figure 2.2). Those coming from or going to untrusted addresses are rejected. The untrusted addresses are determined from a set of rules that implement the security policies of the institution. A client from another network can only access the local host if a rule exists authorizing traffic from its address. Specific rules may indicate an address or a range of addresses. Rules may be positive (allow traffic from some address) or negative (block traffic from some address). Most commercial products order these rules for efficiency in checking. Additionally, if a request is not satisfied by any of the explicit rules, then a default rule is applied.
 
-Figure 2.2: The idea of the packet filter firewall
+<Figures figure="2-2">The idea of the packet filter firewall</Figures>
 
 ### STRUCTURE
 
@@ -106,15 +106,15 @@ We next describe the structure (static view) of the solution and some dynamic as
 
 Figure 2.3 shows the class diagram for an external host requesting access to a local host (a server) through a Packet Filter Firewall (PFFirewall). The institution policies are embodied in the objects of class Rule collected by the rule base RuleBase. The rule base includes data structures and operations to manage rules in a convenient way. The rules in this set are ordered and can be explicit or default.
 
-Figure 2.3: Class diagram for Packet Filter Firewall pattern
+<Figures figure="2-3">Class diagram for Packet Filter Firewall pattern</Figures>
 
 ### DYNAMICS
 
 We describe the dynamic aspects of the Packet Filter Firewall using a sequence diagram for one of its use cases (Figure 2.4). There is a symmetrical use case, ‘Filtering an outgoing request’, which we omit for briefness. We also omit use cases for adding, removing or reordering rules because they are straightforward. (Some authors describe the use case scenario more informally; we also do this at times in this book.)
 
-Figure 2.4: Sequence diagram for filtering a client’s request
+<Figures figure="2-4">Sequence diagram for filtering a client’s request</Figures>
 
-Use Case: Filtering a Client’s Request – Figure 2.4
+#### Use Case: Filtering a Client’s Request – Figure 2.4
 
 |                |                                                                                                                                                                                                 |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -181,7 +181,7 @@ We also include a Variants section if appropriate.
 
 Figure 2.5 describes the relationships of the patterns described in Chapter 4 using a pattern diagram in which rounded rectangles represent patterns and arrows indicate the contribution of a pattern to another. For example, IDENTITY PROVIDER creates identities to be used by an IDENTITY FEDERATION1.
 
-Figure 2.5: Pattern diagram for identity management patterns
+<Figures figure="2-5">Pattern diagram for identity management patterns</Figures>
 
 This diagram is based on those used in [Bus96], but we have used UML generalization notation to indicate patterns that are specializations of other patterns; for example, SAML ASSERTION is a specialized type of CREDENTIAL. We believe that pattern diagrams offer very important help for designers to select which patterns to use at a given point [Fer06d]. This value was confirmed in the experiment described in [Ysk 12]. Their use can be improved by illustrating with a tool that can display them at different stages of design [Fer06d].
 
@@ -195,7 +195,7 @@ We refined the basic classifications through the use of a multi-dimensional matr
 
 Figure 2.6 illustrates a mapping of design patterns in two lifecycle phases and at different levels of architecture. Only a small sample of patterns is shown. While all of the patterns in the figure are applicable to Service Oriented Architecture, some apply more generally to other domains as well. We grouped the patterns within Design along a secondary dimension with Filtering, Access Control and Authentication. In the figure, we show patterns from the domain analysis phase, where the developer would find patterns that explain the domain standards and technologies later used in the design phase. A developer might also navigate to adjoining analysis phase cells (not shown) to look for general patterns on Filtering, Access Control and Authentication. While the patterns are found in these locations in the matrix, understanding their role in a system, and how they relate to one another, still requires a pattern language diagram and other tools and methods for pattern application.
 
-Figure 2.6: A matrix of patterns
+<Figures figure="2-6">A matrix of patterns</Figures>
 
 The patterns presented in this book are grouped by concern, and within that, by the architectural level at which they would be used.
 

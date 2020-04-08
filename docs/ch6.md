@@ -25,7 +25,7 @@ The contents of the rules are defined by institution policies. Policies are high
 
 We present here several patterns for access control that correspond to the models described on page 72 and some of their extensions or generalizations. Figure 6.1 starts from the basic components of access control to provide a more general approach to developing access control models. This diagram can be the starting point that allows a designer to select the type of access control they need in their application. Once this abstract level is clear, we need to go to a software-oriented level, where we can choose more specific approaches. The center of this diagram is POLICY-BASED ACCESS CONTROL (PBAC, page 84) which indicates that the rules represent access policies, which are in turn defined by a Policy pattern (see Figure 6.1). The POLICY-BASED ACCESS CONTROL pattern decides whether a subject is authorized to access an object according to policies defined in a central policy repository. The enforcement of these policies is defined by a Reference Monitor pattern. Depending on its administration, PBAC can be mandatory or discretionary. XACML is a type of PBAC-oriented Service-Oriented Architectures (SOA) [Del07a], shown here as two patterns to separate its aspects of rule definition and evaluation. Policies can be implemented as access control lists (ACLs) or capabilities. The Reference Monitor may use a policy enforcement point (PEP), a policy decision point (PDP), and other patterns to describe the administrative structure of enforcement.
 
-Figure 6.1: A classification of access control patterns
+<Figures figure="6-1">A classification of access control patterns</Figures>
 
 Authorization, RBAC, and multilevel patterns appeared in [Sch06b]; we have revised and updated them. Policy-Based Authorization, Access Control List and Capability are from [Del07a]. The Reified Reference Monitor pattern is from [Fer09c], while the Controlled Access Session pattern is from [Fer06e]. The Security Logger/Auditor pattern comes from [Fer11d].
 
@@ -62,7 +62,7 @@ Indicate, for each active subject that can access resources – objects or prote
 
 Figure 6.2 shows a class diagram of the entities involved. The Subject class describes an active entity that attempts to access a resource (ProtectionObject) in some way. The association between the Subject and the ProtectionObject defines an authorization, from which the pattern gets its name. The association class Right describes the access type (for example read, write) the subject has to the corresponding object. Through this class one can check the rights that a subject has on some object, or who is allowed to access a given object.
 
-Figure 6.2: Class diagram for the AUTHORIZATION pattern
+<Figures figure="6-2">Class diagram for the AUTHORIZATION pattern</Figures>
 
 ### DYNAMICS
 
@@ -102,7 +102,7 @@ AUTHORIZATION is usually represented by an access matrix model, which is the mod
 
 Figure 6.3 extends AUTHORIZATION to include those aspects. A Right now includes not only the type of access allowed, but also a predicate that must be true for the authorization to hold, and a copy flag that can be true or false, indicating whether or not the right can be transferred. CheckRights is an operation to determine the rights of a subject or to find who has the rights to access a given object.
 
-Figure 6.3: Access matrix with predicates and copy flag
+<Figures figure="6-3">Access matrix with predicates and copy flag</Figures>
 
 ### KNOWN USES
 
@@ -143,7 +143,7 @@ Most organizations have a variety of job functions that require different skills
 
 Figure 6.4 shows a class diagram for ROLE-BASED ACCESS CONTROL. The User and Role classes describe registered users and their predefined roles respectively. Users are assigned to roles, roles are given rights according to their functions. The association class Right defines the access types that a user within a role is authorized to apply to the protection object. The combination Role, ProtectionObject and Right is an instance of the AUTHORIZATION pattern.
 
-Figure 6.4: Class diagram for the ROLE-BASED ACCESS CONTROL pattern
+<Figures figure="6-4">Class diagram for the ROLE-BASED ACCESS CONTROL pattern</Figures>
 
 ### DYNAMICS
 
@@ -179,7 +179,7 @@ Some institutions may not have clearly defined roles in their organization, and 
 
 The model shown in Figure 6.5 additionally considers composite roles and objects: it is an application of the Composite pattern [Gam94]. The figure also includes the concept of a session, which defines a context for the use of a role, may restrict the number of roles used together at execution time, and can be used to enforce role exclusion at execution time.
 
-Figure 6.5: Class diagram for the Extended RBAC model
+<Figures figure="6-5">Class diagram for the Extended RBAC model</Figures>
 
 ### KNOWN USES
 
@@ -221,7 +221,7 @@ Assign classifications (as clearances) to users and classifications (as sensitiv
 
 Figure 6.6 shows the class diagram of the MULTILEVEL SECURITY pattern. The UserClassification and DataClassification classes define the active entities and the objects of access respectively. Both classifications may include categories and levels. Trusted processes are allowed to assign users and data to classifications, as defined by the Assignment class.
 
-Figure 6.6: Class diagram for the MULTILEVEL SECURITY pattern
+<Figures figure="6-6">Class diagram for the MULTILEVEL SECURITY pattern</Figures>
 
 ### IMPLEMENTATION
 
@@ -300,7 +300,7 @@ Finally, because rules and policies are designed by different teams, possibly fo
 
 Figure 6.7 illustrates the solution. A Subject’s access requests to particular objects are intercepted by PEPs, which are a part of the security infrastructure that is responsible for enforcing the organization Policy about this access. PEPs query another part of the security infrastructure, the PDP, which is responsible for computing an access decision. To compute the decision, the PDP uses information from a PIP, and retrieves the applicable Policy from the unique PolicyRepository, which stores all of the PolicyRules for the organization.
 
-Figure 6.7: Class diagram for the POLICY-BASED ACCESS CONTROL pattern
+<Figures figure="6-7">Class diagram for the POLICY-BASED ACCESS CONTROL pattern</Figures>
 
 The PolicyRepository is also responsible for retrieving the applicable rules by selecting those rules whose subjectDescriptor, resourceDescriptor and environmentDescriptor match the information about the subject, the resource and the environment obtained from the PIP, and whose accessType matches the required accessType from the request. The PAP is a unique point for administering the rules. In case the evaluation of the Policy leads to a conflict between the decisions of the applicable Rules, a part of the PDP, the DynamicPolicyConflictResolver, is responsible for producing a uniquely determined access decision. Similarly, a StaticPolicyConflictResolver is a part of the PAP and is responsible for identifying conflicting rules within the PolicyRepository.
 
@@ -308,7 +308,7 @@ The PolicyRepository is also responsible for retrieving the applicable rules by 
 
 Figure 6.8 shows a sequence diagram describing the most commonly used case of ‘Request access to an object’. The Subject’s request for accessing an Object is intercepted by a PEP, which forwards the request to the PDP. The PDP can retrieve information about the Subject, the Object and the current environment from the PIP. This information is used to retrieve the applicable Rules from the PolicyRepository.
 
-Figure 6.8: Sequence diagram for the use case ‘Request access to an object’
+<Figures figure="6-8">Sequence diagram for the use case ‘Request access to an object’</Figures>
 
 The PDP can then compute the access decision by combining the decisions from the Rules forming the applicable policy and can finally send this decision back to the PEP. If the access has been granted by the PDP, the PEP forwards the request to the Object.
 
@@ -385,13 +385,13 @@ Implement the access matrix by associating each object with an access control li
 
 Figure 6.9 illustrates the solution. To be protected, an Object must have an associated ACL. This ACL is made up of ACLEntries, each of which contains a set of Rights permitted for a specific authenticated Subject. An authenticated Subject accesses an Object only if a corresponding Right exists in the Object’s ACL. For security reasons, only the PDP can create and modify ACLs. At execution time, the PDP is responsible for searching an Object’s ACL for a Right in order to make an access decision.
 
-Figure 6.9: Class diagram for the ACCESS CONTROL LIST pattern
+<Figures figure="6-9">Class diagram for the ACCESS CONTROL LIST pattern</Figures>
 
 ### DYNAMICS
 
 Figure 6.10 shows a sequence diagram describing the typical use case for ‘Request object access’. The authenticated Subject’s request for access to an Object is intercepted by a PEP, which forwards the request to the PDP. It can then check that the ACL corresponding to the Object contains an ACLEntry which corresponds to the Subject and which holds the accessType requested by the Subject.
 
-Figure 6.10: Sequence diagram for use case ‘Request object access’
+<Figures figure="6-10">Sequence diagram for use case ‘Request object access’</Figures>
 
 ### IMPLEMENTATION
 
@@ -477,13 +477,13 @@ Implement the access matrix by issuing a set of capabilities to each subject. A 
 
 Figure 6.11 illustrates the solution. In order to protect the Objects, a CapabilityProvider, the minimum trusted part of our system, issues a set of Capabilities to each Subject by using a secure channel. A Capability contains a set of Rights that the Subject can perform on a specific Object. A Subject accesses an Object only if a corresponding Right exists in one of the Subject’s Capabilities. At execution time, the PDP is responsible for checking the Capability’s authenticity and searching the Capability for both the requested Object and the requested accessType in order to make an access decision.
 
-Figure 6.11: Class diagram for the CAPABILITY pattern
+<Figures figure="6-11">Class diagram for the CAPABILITY pattern</Figures>
 
 ### DYNAMICS
 
 Figure 6.12 shows a sequence diagram describing the typical use case of ‘Request object access’. The Subject requests access to an Object by including a corresponding Capability. The request is intercepted by a PEP, which forwards the request to the PDP. It can then check that the Capability holds the accessType requested by the Subject.
 
-Figure 6.12: Sequence diagram for the use case ‘Request object access’
+<Figures figure="6-12">Sequence diagram for the use case ‘Request object access’</Figures>
 
 ### IMPLEMENTATION
 
@@ -554,13 +554,13 @@ The solution to this problem must resolve the following forces:
 
 Define an abstract process that intercepts all requests for resources, checks them for compliance with authorizations, makes decisions based on these authorization rules, and stores the decisions, including their attributes (Figure 6.13).
 
-Figure 6.13: The concept of the Reference Monitor
+<Figures figure="6-13">The concept of the Reference Monitor</Figures>
 
 Figure 6.14 shows the class diagram for a reified Reference Monitor. In this figure SetofAuthorizationRules denotes a collection of authorization rules organized in some convenient way. Figure 6.15 shows a sequence diagram illustrating how checking is performed. An executing subject (ActualSubject) requests some type of access to a ProtectionObject. The ReferenceMonitor intercepts the request and searches in the set of authorization rules for a matching Authorization (rule). After the search a Decision is created. If positive, the request proceeds to access the ProtectionObject.
 
-Figure 6.14: Class diagram for the REIFIED REFERENCE MONITOR pattern
+<Figures figure="6-14">Class diagram for the REIFIED REFERENCE MONITOR pattern</Figures>
 
-Figure 6.15: Sequence diagram for enforcing security of requests
+<Figures figure="6-15">Sequence diagram for enforcing security of requests</Figures>
 
 ### CONSEQUENCES
 
@@ -615,13 +615,13 @@ Define a unit of interaction, a session, which has a limited lifetime, for examp
 
 Figure 6.16 shows the class model of the CONTROLLED ACCESS SESSION pattern. The classes Subject and Session have obvious meanings. The class ExecutionContext contains the set of active rights that the subject may use within the session.
 
-Figure 6.16: Class model for the CONTROLLED ACCESS SESSION pattern
+<Figures figure="6-16">Class model for the CONTROLLED ACCESS SESSION pattern</Figures>
 
 ### DYNAMICS
 
 Figure 6.17 shows the use case ‘Open (activate) a session’. A subject logs on and the logon interface authenticates it. The box with a double arrow indicates some authentication dialog or protocol. After the subject is authenticated, the interface creates a session object and returns a handle to the subject.
 
-Figure 6.17: Sequence diagram for the use case ‘Open a session’
+<Figures figure="6-17">Sequence diagram for the use case ‘Open a session’</Figures>
 
 ### IMPLEMENTATION
 
@@ -693,13 +693,13 @@ A subject may have several roles. Each role collects the rights that a user can 
 
 The structure of the SESSION-BASED ROLE-BASED ACCESS CONTROL pattern is shown in the class diagram in Figure 6.18. The class Role is an intermediary between Subject and Object, holding all authorizations a user possesses while performing the role, and acts here as an execution context. Within a Session, only a subset of the roles assigned to a Subject may be activated, just those necessary to perform the intended task. Roles may be composed according to a Composite pattern [Gam94], in which higher-level roles acquire (inherit) rights from lower-level roles.
 
-Figure 6.18: Class diagram for the SESSION-BASED ROLE-BASED ACCESS CONTROL pattern
+<Figures figure="6-18">Class diagram for the SESSION-BASED ROLE-BASED ACCESS CONTROL pattern</Figures>
 
 ### DYNAMICS
 
 Figure 6.19 shows a sequence diagram for the use case ‘Request access to an object’. A Subject has already opened a Session (see Figure 6.17 on page 106) and requests access to an object in a specific way (accessType). The session uses the corresponding ReferenceMonitor, which in turn checks whether the rights of the Session roles allow the access. If so, the access is permitted.
 
-Figure 6.19: Sequence diagram for the use case ‘Request access to an object’
+<Figures figure="6-19">Sequence diagram for the use case ‘Request access to an object’</Figures>
 
 ### IMPLEMENTATION
 
@@ -707,7 +707,7 @@ Figure 6.19: Sequence diagram for the use case ‘Request access to an object’
 2. Collect lists of incompatible roles and use these lists when a session is started (static constraints). These constraints can be defined using OCL or some other formal language as additions to the class diagram of the pattern.
 3. Determine the number of roles which may be active within a session (dynamic constraints).
 4. When a user opens a session, they must declare what roles they intend to use, and the system will open the corresponding session, or refuse to do so in the case of conflicts.
-   
+
 See [Fer06e] for an example of a real implementation.
 
 ### EXAMPLE RESOLVED
@@ -772,7 +772,7 @@ The database of access entries must have authentication and authorization system
 
 In Figure 6.20 User operations are logged by the LoggerAuditor. The LoggerAuditor keeps the Log of user accesses, in which each access is described by a LogEntry. The security administrator (SecAdmin) activates or deactivates the Log. The Auditor can read the Log to detect possible unauthorized actions.
 
-Figure 6.20: Class diagram of the SECURITY LOGGER AND AUDITOR pattern
+<Figures figure="6-20">Class diagram of the SECURITY LOGGER AND AUDITOR pattern</Figures>
 
 ### DYNAMICS
 
@@ -780,7 +780,7 @@ Possible use cases include ‘Log user access’, ‘Audit log’, ‘Query log 
 
 A sequence diagram for the use case ‘Log user access’ is shown in Figure 6.21. The User performs an operation to apply an access type on some object: operation (accessType, object). The LoggerAuditor adds an entry with this information, and the name of the user, to the Log. The Log creates a LogEntry, adding the time of the operation.
 
-Figure 6.21: Sequence diagram for the use case ‘Log user access’
+<Figures figure="6-21">Sequence diagram for the use case ‘Log user access’</Figures>
 
 ### IMPLEMENTATION
 

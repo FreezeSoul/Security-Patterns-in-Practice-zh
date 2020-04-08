@@ -20,7 +20,7 @@ A decision to grant access must be based on the service’s access control rules
 
 Figure 4.1 describes the relationships of the patterns described in this chapter, and associated patterns, using a pattern diagram. We use UML generalization to indicate patterns that are specializations of other patterns; for example, the SAML ASSERTION is a specialized type of CREDENTIAL. A security domain is a set of resources in which the administration of security is performed by a unique entity, which typically stores identity information about the subjects1 of the domain:
 
-Figure 4.1: Pattern diagram for identity management
+<Figures figure="4-1">Pattern diagram for identity management</Figures>
 
 - The IDENTITY PROVIDER pattern centralizes the administration of a security domain’s users, creating and managing identities for their credentials.
 - The CIRCLE OF TRUST pattern represents a federation of service providers that share trust relationships.
@@ -62,7 +62,7 @@ Each service provider establishes business relationships with a set of other ser
 
 Figure 4.2 shows a UML class diagram with an OCL constraint describing the structure of the solution. A CircleOfTrust includes several ServiceProviders, who trust each other, as described by the OCL expression.
 
-Figure 4.2: Class diagram for the CIRCLE OF TRUST pattern
+<Figures figure="4-2">Class diagram for the CIRCLE OF TRUST pattern</Figures>
 
 ### IMPLEMENTATION
 
@@ -119,7 +119,7 @@ We define a security domain as the set of resources whose subjects’ identities
 
 Figure 4.3 shows a UML class diagram describing the structure of the solution. This pattern combines the CIRCLE OF TRUST, making explicit its Resources and specializing ServiceProvider to the IdentityProvider. Subjects are identified using CREDENTIALs given by a specific identity provider.
 
-Figure 4.3: Class diagram for the IDENTITY PROVIDER pattern
+<Figures figure="4-3">Class diagram for the IDENTITY PROVIDER pattern</Figures>
 
 ### EXAMPLE RESOLVED
 
@@ -177,13 +177,13 @@ In a security domain, the local identity associated with a user consists of a se
 
 Figure 4.4 illustrates an example of how security domains and identity federations can coexist: a security domain is typically a circle of trust within an organization, whereas an identity federation is a circle of trust whose members can come from different organizations.
 
-Figure 4.4: Federation and domains
+<Figures figure="4-4">Federation and domains</Figures>
 
 ### STRUCTURE
 
 Figure 4.5 shows a UML class diagram with an OCL constraint describing the structure of the solution. An IdentityFederation consists of a set of ServiceProviders which provide services to Subjects. A Subject has multiple LocalIdentities with some ServiceProviders. A LocalIdentity can be described as a set of Attributes of the Subject.
 
-Figure 4.5: Class diagram for the IDENTITY FEDERATION pattern
+<Figures figure="4-5">Class diagram for the IDENTITY FEDERATION pattern</Figures>
 
 A Subject can have several FederatedIdentities. This FederatedIdentity is composed of a union of attributes from the LocalIdentities of the IdentityFederation. An IdentityProvider is responsible for managing the LocalIdentities within a SecurityDomain, and can authenticate any Subjects on behalf of any ServiceProvider of the IdentityFederation. A Subject has been issued a set of Credentials that collect information about its authentication status and its identity within a SecurityDomain.
 
@@ -191,9 +191,9 @@ A Subject can have several FederatedIdentities. This FederatedIdentity is compos
 
 We illustrate the dynamic aspects of the IDENTITY FEDERATION pattern by showing sequence diagrams for two use cases: ‘Federate two local identities’ (Figure 4.6) and ‘Single sign on’ (Figure 4.7). The first use case describes how a local entity invites another to join, and their mutual authentication. The second use case shows how a subject, after receiving a credential from an identity provider, uses it to access a new domain.
 
-Figure 4.6: Sequence diagram for the use case ‘Federate two local identities’
+<Figures figure="4-6">Sequence diagram for the use case ‘Federate two local identities’</Figures>
 
-Figure 4.7: Sequence diagram for the use case ‘Single sign on’
+<Figures figure="4-7">Sequence diagram for the use case ‘Single sign on’</Figures>
 
 ### IMPLEMENTATION
 
@@ -266,7 +266,7 @@ Service providers manage local accounts for their clients. They form identity fe
 
 Figure 4.8 illustrates the solution. An IdentityFederation consists of a set of ServiceProviders which provide services to Subjects. At least one of the ServiceProviders acts as the IdentityProvider, with which other ServiceProviders affiliate. A Subject has multiple LocalIdentities with some ServiceProviders. A LocalIdentity can be described as a set of Attributes of the Subject.
 
-Figure 4.8: Class diagram for the LIBERTY ALLIANCE IDENTITY FEDERATION pattern
+<Figures figure="4-8">Class diagram for the LIBERTY ALLIANCE IDENTITY FEDERATION pattern</Figures>
 
 This Subject can have several FederatedIdentities. Each FederatedIdentity is composed of several LocalIdentities. The IdentityProvider is responsible for managing the FederatedIdentities, and can authenticate any Subject on behalf of any ServiceProvider of the IdentityFederation. A Subject has a set of SAMLAuthenticationAssertions (Chapter 11) that collect information about its authentication status with a ServiceProvider.
 
@@ -276,7 +276,7 @@ We illustrate the dynamic aspects of the LIBERTY ALLIANCE IDENTITY FEDERATION pa
 
 #### Use Case: Federate Two Local Identities – Figure 4.9
 
-Figure 4.9: Sequence diagram for the use case ‘Federate two local identities’
+<Figures figure="4-9">Sequence diagram for the use case ‘Federate two local identities’</Figures>
 
 |                 |                                                                                                                                                                                                                                                                                                    |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -297,7 +297,7 @@ Figure 4.9: Sequence diagram for the use case ‘Federate two local identities�
 
 #### Use Case: Single Sign On – Figure 4.10
 
-Figure 4.10: Sequence diagram for the use case ‘Single sign on’
+<Figures figure="4-10">Sequence diagram for the use case ‘Single sign on’</Figures>
 
 |               |                                                                                                                                                                                                                                                                                                     |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

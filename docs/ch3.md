@@ -32,7 +32,7 @@ A fundamental idea in our proposed methodology is that security principles must 
 
 We first sketch a secure software development cycle that we consider effective for building secure systems, then we discuss each stage in detail. Figure 3.1 shows a secure software lifecycle. The white arrows show where security can be applied, while the black arrows show where we can audit compliance with security policies:
 
-Figure 3.1: Secure software lifecycle
+<Figures figure="3-1">Secure software lifecycle</Figures>
 
 - From the requirements stage we generate secure use cases.
 - From the analysis stage we generate authorization rules that apply to the conceptual model.
@@ -46,7 +46,7 @@ Security verification and testing occurs at every stage of development. We descr
 - Analysis stage. Analysis patterns, and in particular semantic analysis patterns, can be used to build the conceptual model in a more reliable and efficient way [Fer00]. Security patterns describe security models or mechanisms. We can build a conceptual model in which repeated applications of a security pattern realize the rights determined from use cases. In fact, analysis patterns can be built with predefined authorizations according to the roles in their use cases. Then we only need to additionally specify the rights for those parts not covered by patterns. We can then start to define mechanisms (countermeasures) to prevent attacks.
 - Design stage. We express the abstract security patterns identified in the analysis stage in the design artifacts; for example interfaces, components, distribution and networking. Figure 3.2 shows some possible attacks to a system. Design mechanisms are selected to stop these attacks. User interfaces should correspond to use cases, and may be used to enforce the authorizations defined in the analysis stage. Secure interfaces enforce authorizations when users interact with the system. Components can be secured by using authorization rules for Java or .NET components.
 
-Figure 3.2: Typical attacks to the layers of a system
+<Figures figure="3-2">Typical attacks to the layers of a system</Figures>
 
 Distribution provides another dimension to which security restrictions can be applied. Deployment diagrams can define secure configurations to be used by security administrators. A multilayer architecture is needed to enforce the security constraints defined at the application level. In each level we use patterns to represent appropriate security mechanisms. Security constraints must be mapped between levels.
 
@@ -61,7 +61,7 @@ Metamodels describe sets of related concepts that are instantiated together (may
 
 Figure 3.3 shows a metamodel connecting threats and failures to patterns [Fer11c]. In the diagram, a threat can be neutralized by a security policy. Similarly, a failure can be neutralized by a reliability policy. Policies may also include regulations and institution policies. Security and reliability policies are realized by security and reliability patterns, respectively. A policy realization pattern is a pattern that realizes any type of policy and consists of a few classes and associations. Security and reliability patterns are special cases of policy realization patterns.
 
-Figure 3.3: Metamodel for requirements and patterns
+<Figures figure="3-3">Metamodel for requirements and patterns</Figures>
 
 We have done some work on MDE [Del08], but we need to use it more to make this methodology easier to use, by automating parts of it and adding appropriate tools. [Del08] proposed a metamodel to go from the analysis to a design model. [Ysk08] presented a set of transformations for specific security requirements: delegation of execution, authorization and auditing, using a metamodel tailored for these requirements. A sub-product of MDE is traceability; it now becomes easier to trace back the effect of changes in the code.
 

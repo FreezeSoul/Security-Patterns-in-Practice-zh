@@ -14,7 +14,7 @@ Identification and authentication (I&A) uses some kind of protocol to establish 
 
 Figure 5.1 shows how the patterns described in this chapter are interrelated. Once a subject (a user or a system) has identified themselves to the system, we need to verify that their identity is correct. This is the function of the authentication function. AUTHENTICATOR is an abstract pattern, and we show here two concrete versions: REMOTE AUTHENTICATOR/AUTHORIZER and CREDENTIAL. CREDENTIALs may have also authorization properties, discussed later. In distributed systems where users may have access to several systems a Single Sign On service is very convenient1. REMOTE AUTHENTICATOR/AUTHORIZER and CREDENTIAL have dual purposes; they can also be used for authorization if they include user rights. Chapter 6 describes how to let users access specific resources once they have been authenticated.
 
-Figure 5.1: Relationships between the patterns in this chapter
+<Figures figure="5-1">Relationships between the patterns in this chapter</Figures>
 
 AUTHENTICATOR was first published in [Fer03b] and is joint work with John Sinibaldi. Remote Authenticator was first described in [War03a], and was written with Reghu Warrier. CREDENTIAL is joint work with Patrick Morrison [Mor06a].
 
@@ -50,13 +50,13 @@ Use a single point of access to receive the interactions of a subject with the s
 
 Figure 5.2 shows the class diagram for this pattern. A Subject requests access to the system. The Authenticator receives this request and applies a protocol using some AuthenticationInformation. If the authentication is successful, the Authenticator creates a ProofOfIdentity, which is assigned to the subject to indicate that they are legitimate.
 
-Figure 5.2: Class diagram for the AUTHENTICATOR pattern
+<Figures figure="5-2">Class diagram for the AUTHENTICATOR pattern</Figures>
 
 ### DYNAMICS
 
 Figure 5.3 shows the dynamics of the authentication process. A subject User requests access to the system through the Authenticator. The Authenticator applies some authentication protocol, for example by verifying some information presented by the subject, and as a result a ProofOfIdentity is created and assigned to the subject.
 
-Figure 5.3: Sequence diagram for the use case ‘Authenticate subject’
+<Figures figure="5-3">Sequence diagram for the use case ‘Authenticate subject’</Figures>
 
 ### IMPLEMENTATION
 
@@ -147,7 +147,7 @@ We can achieve this redirection by using a specialized authentication/authorizat
 
 Figure 5.4 shows this approach. The Client makes a request for a service through a ProxyAuthenticator/Authorizer that represents the actual server that contains the user login information. The request is routed to the Authenticator/Authorizer, which validates it, based on the role of the subject of the request and the rights of this role with respect to the protection object1.
 
-Figure 5.4: Class diagram for the REMOTE AUTHENTICATOR/AUTHORIZER pattern
+<Figures figure="5-4">Class diagram for the REMOTE AUTHENTICATOR/AUTHORIZER pattern</Figures>
 
 ### DYNAMICS
 
@@ -162,7 +162,7 @@ Typical systems use the following types of messages:
 
 A message consists of a header and attributes. Each attribute specifies a piece of information about the connection attempt. The scenario of Figure 5.5 illustrates a proxy-based communication between a client and the forwarding and remote servers:
 
-Figure 5.5: Sequence diagram for client authentication
+<Figures figure="5-5">Sequence diagram for client authentication</Figures>
 
 1. A client sends its access-request to the forwarding server.
 2. The forwarding server forwards the access-request to the remote server.
@@ -184,7 +184,7 @@ Authorization functions are discussed in Chapter 6: we consider here only authen
 
 Figure 5.6 shows an example of a remote authentication dial-in user service (RADIUS) system using a challenge-response approach. (More details of the RADIUS system are shown in the next section.)
 
-Figure 5.6: RADIUS challenge/response authentication
+<Figures figure="5-6">RADIUS challenge/response authentication</Figures>
 
 ### EXAMPLE RESOLVED
 
@@ -271,7 +271,7 @@ Store authentication and authorization data in a data structure external to the 
 
 In Figure 5.7 the Principal is an active entity such as a person or a process1. The Principal possesses a Credential, representing its identity and its authorization rights. A Credential is a composite describing facts about the rights available to the principal. The Attribute may flag whether it is presently enabled, allowing principal control over whether to exercise the right implied by the Credential. An expiration date allows control over the duration of the rights implied by the attribute.
 
-Figure 5.7: Class diagram for the CREDENTIAL pattern
+<Figures figure="5-7">Class diagram for the CREDENTIAL pattern</Figures>
 
 A Credential is issued by an Authority, and is checked by an Authenticator or an Authorizer. Specialization of a Credential is achieved through setting Attribute names and values.
 
@@ -288,13 +288,13 @@ There are four primary use cases:
 
 #### Use Case: Issue Credential – Figure 5.8
 
-Figure 5.8: Sequence diagram for the use case ‘Issue credential’
+<Figures figure="5-8">Sequence diagram for the use case ‘Issue credential’</Figures>
 
 The Principal presents itself and any required documentation of its identity to an Authority. Based upon its rules and what it ascertains about the Principal, the Authority creates and returns a Credential. The returned data may include an identity credential, group and role membership credential attribute, and privilege credential attributes. As a special case, the Authority may generate a defined ‘public’ Credential for Principals not previously known to the system. This Credential is made available to Authenticators which reference this Authority.
 
 #### Use Case: Principal Authentication – Figure 5.9
 
-Figure 5.9: Sequence diagram for the use case ‘Principal authentication’
+<Figures figure="5-9">Sequence diagram for the use case ‘Principal authentication’</Figures>
 
 The Principal requests authentication at an Authenticator, supplying its name and authentication Credential. The Authenticator checks the Credential and makes an access decision. There are different phases and strengths of check that may be appropriate for this step, discussed in the Implementation section. It is necessary for the Authenticator to be established in conjunction with the original authority. Not shown in the sequence diagram, but it is also optionally possible to forward the authentication request and credentials to the authority for verification.
 
