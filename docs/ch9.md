@@ -12,7 +12,7 @@ Operating systems act as an intermediary between the user of a computer and its 
 
 Most operating systems use five basic architectures [Sil08][tan08]. One, the monolithic architecture, has little value for security and it is only mentioned as a possible variant of the modular architecture. We present here patterns representing these four architectures (Figure 9.1):
 
-Figure 9.1: Pattern diagram of OS architectures, administration and file systems
+<Figures figure="9-1">Pattern diagram of OS architectures, administration and file systems</Figures>
 
 - MODULAR OPERATING SYSTEM ARCHITECTURE. Separate the operating system’s services into modules, each representing a basic function or component. The basic core kernel only has the required components to start itself and the ability to load modules. The core is the one module always in memory. Whenever the services of any additional modules are required, the module loader loads the appropriate module. Each module performs a function and may take parameters.
 - LAYERED OPERATING SYSTEM ARCHITECTURE. The overall features and functionality of the operating system are decomposed and assigned to hierarchical layers. This provides clearly defined interfaces between each section of the operating system and between user applications and the system functions. Layer i uses services of a lower layer i-1 and does not know of the existence of a higher layer, i+1.
@@ -57,7 +57,7 @@ Define a core module that can load and link modules dynamically as needed.
 
 Figure 9.2 shows a class diagram for this pattern. The KernelCore is the core of the modular operating system. A set of LoadableModules is associated with the KernelCore, indicating the modules that can be loaded according to their applications and the functions required. Any LoadableModule can call any other LoadableModule.
 
-Figure 9.2: Class diagram for the MODULAR OPERATING SYSTEM ARCHITECTURE pattern
+<Figures figure="9-2">Class diagram for the MODULAR OPERATING SYSTEM ARCHITECTURE pattern</Figures>
 
 ### IMPLEMENTATION
 
@@ -96,7 +96,7 @@ Monolithic Kernel. The operating system is a collection of procedures. Each proc
 
 - The Solaris 10 operating system (Figure 9.3) is designed following this pattern. Its kernel is dynamic and composed of a core system that is always resident in memory [Sun04a]. The various types of Solaris 10 loadable modules are shown in Figure 9.3 as loaded by the kernel core: the diagram does not represent the communication links between individual modules.
 
-Figure 9.3: The modular design of the Solaris 10 operating system [Si|08]
+<Figures figure="9-3">The modular design of the Solaris 10 operating system [Si|08]</Figures>
 
 - Extreme Ware from Extreme Networks [Ext].
 - Some versions of Linux use a combination of modular and monolithic architectures.
@@ -137,13 +137,13 @@ Define a hierarchical set of layers and assign components to each layer. Each la
 
 Figure 9.4 shows a class diagram for the LAYERED OPERATING SYSTEM ARCHITECTURE pattern. LayerN represents the highest level of abstraction, and Layer1 is the lowest level of abstraction. The main structural characteristic is that the services of LayerN are used only by LayerN+1. Each layer may contain complex entities consisting of different components.
 
-Figure 9.4: Class diagram for LAYERED OPERATING SYSTEM ARCHITECTURE pattern
+<Figures figure="9-4">Class diagram for LAYERED OPERATING SYSTEM ARCHITECTURE pattern</Figures>
 
 ### DYNAMICS
 
 Figure 9.5 shows the sequence diagram for the use case ‘Open and read a disk file’:
 
-Figure 9.5: Sequence diagram for the use case ‘Open and read a disk file’
+<Figures figure="9-5">Sequence diagram for the use case ‘Open and read a disk file’</Figures>
 
 - A user sends an openFile() request to the OSInterface.
 - The OSInterface interprets the openFile() request.
@@ -161,7 +161,7 @@ Figure 9.5: Sequence diagram for the use case ‘Open and read a disk file’
 
 We structured the functions of our system as in shown in Figure 9.6, and now we have a way to control interactions and enforce abstraction. For example, the file system can use the operations of the disk drivers and enforce similar restrictions in the storage of data.
 
-Figure 9.6: An example of the use of a layered OS architecture
+<Figures figure="9-6">An example of the use of a layered OS architecture</Figures>
 
 The user of a file cannot take advantage of the implementation details of the disk driver to attack the system.
 
@@ -183,11 +183,11 @@ The pattern also has the following potential liabilities:
 
 - The Symbian operating system (Figure 9.7) uses a variation of the layered approach [Sym01].
 
-Figure 9.7: Symbian operating system layered architecture [Sym01]
+<Figures figure="9-7">Symbian operating system layered architecture [Sym01]</Figures>
 
 - The UNIX operating system (Figure 9.8) is separated into four layers, with clear interfaces between the system calls to the kernel and between the kernel and the hardware.
 
-Figure 9.8: UNIX layered architecture [Sil08]
+<Figures figure="9-8">UNIX layered architecture [Sil08]</Figures>
 
 - IBM’s OS/2 also uses this approach [OS2].
 
@@ -230,13 +230,13 @@ Separate all functionality into specialized services with well-defined interface
 
 The Microkernel is the central communication for the operating system. There is one Microkernel and several InternalServers and ExternalServers, each providing a set of specialized services (Figure 9.9). In addition to the servers, an Adapter is used between the Client and the Microkernel or an external server. The Microkernel controls the internal servers.
 
-Figure 9.9: Class diagram for MICROKERNEL OPERATING SYSTEM ARCHITECTURE pattern
+<Figures figure="9-9">Class diagram for MICROKERNEL OPERATING SYSTEM ARCHITECTURE pattern</Figures>
 
 ### DYNAMICS
 
 A client requests a service from an external server using the following sequence (Figure 9.10):
 
-Figure 9.10: Sequence diagram for an operating system call through the microkernel
+<Figures figure="9-10">Sequence diagram for an operating system call through the microkernel</Figures>
 
 1. The Adapter receives the request from the Client and asks the Microkernel for a communication link with the ExternalServer.
 2. The Microkernel checks for authorization to use the server, determines the physical address of the ExternalServer and returns it to the Adapter.
@@ -275,11 +275,11 @@ The MICROKERNEL OPERATING SYSTEM ARCHITECTURE pattern offers the following benef
 
 - The PalmOS Cobalt (Figure 9.11) operating system has a preemptive multitasking kernel that provides basic task management. Many applications in PalmOS do not use the microkernel services; they are handled automatically by the system. The microkernel functionality is provided for internal use by system software or for certain special-purpose applications [Pal].
 
-Figure 9.11: PalmOS Microkernel combined with layered OS architecture [Pal]
+<Figures figure="9-11">PalmOS Microkernel combined with layered OS architecture [Pal]</Figures>
 
 - The QNX Microkernel (Figure 9.12) is intended mostly for communication and process scheduling in real-time systems [QNX]. It will be used in the new RIM systems, adopting a layered architecture [Qwi].
 
-Figure 9.12: QNX microkernel architecture [QNX]
+<Figures figure="9-12">QNX microkernel architecture [QNX]</Figures>
 
 - Mach and Windows NT also use some form of microkernels [Sil08].
 
@@ -322,13 +322,13 @@ Define an architectural layer that is in control of the hardware and supervises 
 
 Figure 9.13 shows a class diagram for the VIRTUAL MACHINE OPERATING SYSTEM ARCHITECTURE (VMOS) pattern. The VMOS contains one VirtualMachineMonitor (VMM) and multiple virtual machines (VM). Each VM can run a local operating system (LocalOS). The VirtualMachineMonitor supports each LocalOS and is able to interpret its system calls. As a LocalProcess runs on a LocalOS, the VM passes the operating system calls to the VMM, which executes them in the hardware.
 
-Figure 9.13: Class diagram for the VIRTUAL MACHINE OPERATING SYSTEM ARCHITECTURE pattern
+<Figures figure="9-13">Class diagram for the VIRTUAL MACHINE OPERATING SYSTEM ARCHITECTURE pattern</Figures>
 
 ### DYNAMICS
 
 Figure 9.14 shows the sequence diagram for the use case ‘Perform an OS call on a virtual machine’. A local process wishing to perform a system operation uses the following sequence:
 
-Figure 9.14: Sequence diagram for the use case ‘Perform an OS call on virtual machine’
+<Figures figure="9-14">Sequence diagram for the use case ‘Perform an OS call on virtual machine’</Figures>
 
 1. A LocalProcess makes an operating system call to the LocalOS.
 2. The LocalOS maps the operating system call to the VMM (by executing a privileged operation).
@@ -346,7 +346,7 @@ Figure 9.14: Sequence diagram for the use case ‘Perform an OS call on virtual 
 
 In the example shown in Figure 9.15, two companies using UNIX and Linux can execute their applications in different virtual machines. The VMM provides strong isolation between these two execution environments.
 
-Figure 9.15: Virtual Machine operating system example
+<Figures figure="9-15">Virtual Machine operating system example</Figures>
 
 ### CONSEQUENCES
 
@@ -414,7 +414,7 @@ Separate the different administrative rights into several hierarchical roles. Th
 
 Figure 9.16 shows a hierarchy for administration roles. This follows the Composite pattern [Gam94]; that is, a role can be simple or composed of other roles, defining a tree hierarchy. The top-level Administrator can add or remove administrators of any type and initialize the system, but should have no other functions. Administrators in the second level control different aspects, for example security, or use of resources. Administrators can further delegate their functions to lower-level administrators. Some functions may require two administrators to collaborate.
 
-Figure 9.16: Class diagram for the ADMINISTRATOR HIERARCHY pattern
+<Figures figure="9-16">Class diagram for the ADMINISTRATOR HIERARCHY pattern</Figures>
 
 ### IMPLEMENTATION
 
@@ -424,7 +424,7 @@ Figure 9.16: Class diagram for the ADMINISTRATOR HIERARCHY pattern
 
 Figure 9.17 shows a class diagram describing a typical administrator hierarchy. Here the SystemAdministrator starts the system and does not perform further actions. The second-level administrators can perform set up and other functions; the SecurityAdministrator defines security rights. SecurityDomainAdministrators define security in their domains.
 
-Figure 9.17: A typical administration hierarchy
+<Figures figure="9-17">A typical administration hierarchy</Figures>
 
 ### EXAMPLE RESOLVED
 
@@ -491,13 +491,13 @@ We apply the AUTHORIZATION pattern (page 74) first to describe access to files b
 
 The class diagram in Figure 9.18 combines two versions of the AUTHORIZATION pattern with a Composite pattern. File access is an extension of that pattern by replacing ProtectionObject by FileComponent and Right by AccessControlListEntry (ACLE), and workstation access is defined by a similar application of the AUTHORIZATION pattern.
 
-Figure 9.18: Class diagram for the FILE ACCESS CONTROL pattern
+<Figures figure="9-18">Class diagram for the FILE ACCESS CONTROL pattern</Figures>
 
 ### DYNAMICS
 
 The sequence diagram in Figure 9.19 shows the use case ‘Open and write to a file’. A user actor opens the file, the directory locates it and when found, opens it. Opening results in the file access permission being set up for future reference1. When the user later tries to write to the file, their rights to write the file are checked and the write operation proceeds if authorized.
 
-Figure 9.19: Sequence diagram for the use case ‘Open and write to a file’
+<Figures figure="9-19">Sequence diagram for the use case ‘Open and write to a file’</Figures>
 
 ### EXAMPLE RESOLVED
 

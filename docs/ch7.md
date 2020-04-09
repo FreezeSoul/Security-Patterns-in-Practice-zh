@@ -28,7 +28,7 @@ Executing applications need to create objects for their work. Some objects are c
 
 In this chapter we present patterns for secure process management. Figure 7.1 shows how these patterns work together. They include:
 
-Figure 7.1: Patterns for secure process management
+<Figures figure="7-1">Patterns for secure process management</Figures>
 
 - SECURE PROCESS/THREAD. How can we make sure that a process does not interfere with other processes or misuse shared resources? A process is a program in execution; a secure process is also a unit of execution isolation as well as a holder of rights to access resources, and has a separate virtual address space. A thread is a lightweight process. A variant, called Secure Thread, is a lightweight process with controlled access to resources.
 - CONTROLLED-PROCESS CREATOR. How can we define the rights to be given to new processes? Define the rights of a new process as part of their creation.
@@ -77,7 +77,7 @@ It may also be possible to add resource quotas, to avoid denial of service probl
 
 Figure 7.2 shows the class diagram for the SECURE PROCESS/THREAD pattern. In the figure, each ProcessDescriptor has ProcessRights for specific Resources. Additional security information indicates the owner of the process. The ProcessRights are defined by the AUTHORIZATION pattern (page 74; the ProcessDescriptor acts as subject in this pattern) and are enforced by the REIFIED REFERENCE MONITOR pattern (page 100), which intercepts request for resources and checks them for authorization. More than one ProcessDescriptor can be created, describing different processes and corresponding to multiple executions of ProgramCode. A separate VirtualAddressSpace is associated with each process (defined by the VIRTUAL ADDRESS SPACE ACCESS CONTROL pattern (page 146). The process context is stored in the VirtualAddressSpace of the process, while the ProgramCode can be shared by several processes.
 
-Figure 7.2: Class diagram for the SECURE PROCESS pattern
+<Figures figure="7-2">Class diagram for the SECURE PROCESS pattern</Figures>
 
 ### DYNAMICS
 
@@ -85,7 +85,7 @@ Figure 7.3 shows a sequence diagram for the use case ‘Access a resource’. A 
 
 Other related use cases (not shown) include ‘Assign a right to a process’ and ‘Remove a right from a process’.
 
-Figure 7.3: Sequence diagram for the use case ‘Access a resource’
+<Figures figure="7-3">Sequence diagram for the use case ‘Access a resource’</Figures>
 
 ### IMPLEMENTATION
 
@@ -124,7 +124,7 @@ The pattern has the following potential liabilities:
 
 - Secure Thread. Because of the slow context switching of processes, most operating systems use threads, which have a smaller context. How can we make the execution of a thread secure? A secure thread is a thread with controlled access to resources. Figure 7.4 represents the addition of the ThreadDescriptor to the secure process. One process may have multiple threads of execution. Each thread is represented by a ThreadDescriptor. A unique VirtualAddressSpace is associated with a process and shared by peer threads. ThreadRights define access rights to the VirtualAddressSpace.
 
-Figure 7.4: Class diagram for the SECURE THREAD pattern
+<Figures figure="7-4">Class diagram for the SECURE THREAD pattern</Figures>
 
 Thread status typically includes a stack, a program counter and some status bits. There are various ways of associating threads with a process [Sil05]; typically, several threads are collected into a process. Threads can be created with special packages, for example PTHREADS in UNIX, or through the language, as in Java or Ada. Rights can be added explicitly, or we can use the hardware architecture’s enforcement of the proper use of the process areas (see Known Uses).
 
@@ -170,13 +170,13 @@ Because new processes are created through system calls or messages to the operat
 
 Figure 7.5 shows the class diagram for this pattern. The ControlledProcessCreator is the part of the operating system in charge of creating processes. The CreationRequest contains the access rights that the parent defines for the created child. These access rights must be a subset of the parent’s access rights.
 
-Figure 7.5: Class diagram for the CONTROLLED-PROCESS CREATOR pattern
+<Figures figure="7-5">Class diagram for the CONTROLLED-PROCESS CREATOR pattern</Figures>
 
 ### DYNAMICS
 
 Figure 7.6 shows the dynamics of process creation. A Process requests the creation of a new Process. The access rights passed in the creation request are used to create the AccessRights for the new process.
 
-Figure 7.6: Process creation dynamics
+<Figures figure="7-6">Process creation dynamics</Figures>
 
 ### IMPLEMENTATION
 
@@ -239,13 +239,13 @@ Whenever a new object is created, define a list of subjects that can access it, 
 
 The class diagram for this pattern is shown in Figure 7.7. When a Process creates a new object through a Factory, the CreationRequest includes the features of the new object. Among these features is a list of rights defining rights for a Subject to access the created Object. This implies that we need to intercept every access request: this is done by an implementation of the CONTROLLED-OBJECT MONITOR pattern (page 132).
 
-Figure 7.7: Class diagram for the CONTROLLED-OBJECT FACTORY pattern
+<Figures figure="7-7">Class diagram for the CONTROLLED-OBJECT FACTORY pattern</Figures>
 
 ### DYNAMICS
 
 Figure 7.8 shows the dynamics of object creation. A Process creating an Object through a Factory defines the rights for other subjects with respect to this object.
 
-Figure 7.8: Object creation dynamics
+<Figures figure="7-8">Object creation dynamics</Figures>
 
 ### IMPLEMENTATION
 
@@ -308,13 +308,13 @@ Use a specialized reference monitor to intercept access requests from processes.
 
 Figure 7.9 shows the class diagram for this pattern. This is a more specific implementation of the Reference Monitor pattern ([Sch06b]). The modification shows how the system associates the rule to the secure object in question.
 
-Figure 7.9: Class diagram for the CONTROLLED-OBJECT MONITOR pattern
+<Figures figure="7-9">Class diagram for the CONTROLLED-OBJECT MONITOR pattern</Figures>
 
 ### DYNAMICS
 
 Figure 7.10 shows the dynamics of secure subject access to a secure Object. Here the request is sent to the ReferenceMonitor, where it checks the AccessRules. If the access is allowed, it is performed and the result returned to the subject. Note that here, a handle or ticket is returned to the subject, so that future access to the secure Object can be performed directly, without additional checking.
 
-Figure 7.10: Sequence diagram for validating an access request
+<Figures figure="7-10">Sequence diagram for validating an access request</Figures>
 
 ### IMPLEMENTATION
 
@@ -387,13 +387,13 @@ Systems that use explicit message passing have the possibility of checking each 
 
 Figure 7.11 shows the class diagram of the solution. CallingProcess and CalledProcess are roles of processes in general. When a CallingProcess makes a request for a service to another process, the request is handled by an EntryPoint. This EntryPoint has a name and a list of parameters with predefined numbers, types, and size limits that can be used to check the correctness of the call signature. It can optionally add access control checks by using a Reference Monitor pattern or other input data tests.
 
-Figure 7.11: Class diagram for the PROTECTED ENTRY POINTS pattern
+<Figures figure="7-11">Class diagram for the PROTECTED ENTRY POINTS pattern</Figures>
 
 ### DYNAMICS
 
 Figure 7.12 shows a CallingProcess performing a service call. The call must use a proper signature: that is, if the name of the service (opName) or the names of the parameters are incorrect, and the type or length of the parameters is not correct, it is rejected (this is checked by operation checkParmList).
 
-Figure 7.12 Sequence diagram for a process making a service call
+<Figures figure="7-12">Sequence diagram for a process making a service call</Figures>
 
 ### IMPLEMENTATION
 
@@ -458,19 +458,19 @@ Define a set of hierarchical protection domains, called protection rings (typica
 
 Figure 7.13 shows a class diagram for this pattern. The CallingProcess requests services from a CalledProcess. To do so, it must enter a CallGate, which applies protected entry points that check the correct use of signatures. CallRules define the requirements for inter-level calls. The CallingProcess can access Data according to a set of DataAccess-Rules.
 
-Figure 7.13: Class diagram for the PROTECTION RINGS pattern
+<Figures figure="7-13">Class diagram for the PROTECTION RINGS pattern</Figures>
 
 ### DYNAMICS
 
 Figure 7.14 shows a sequence diagram for a call to a higher-privilege ring. If the call fails an exception may be raised.
 
-Figure 7.14: Sequence diagram for a successful call to a higher-privilege ring
+<Figures figure="7-14">Sequence diagram for a successful call to a higher-privilege ring</Figures>
 
 ### IMPLEMENTATION
 
 The call rules and the data access rules are usually implemented in the call instruction microcode [int99]. Figure 7.15 shows a typical use of rings. Processes are assigned to rings based on their level of trust; for example, we could assign four rings in decreasing order of privilege and trust, to supervisor, utilities, trusted user programs, untrusted user programs.
 
-Figure 7.15: Assignment of protection rings
+<Figures figure="7-15">Assignment of protection rings</Figures>
 
 The program status word of the process indicates its current ring, and data descriptors also indicate their assigned rings. The values of the calling and called processes are compared to apply the transfer rules.
 

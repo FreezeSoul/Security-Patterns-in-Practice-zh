@@ -17,7 +17,7 @@ In this chapter we present patterns for the secure execution of processes:
 
 Assume here that resources are represented as objects, as it is common in modern operating systems. Figure 8.1 shows how these patterns are organized into a pattern language. For example, authentication is needed for file access and for controlled object access, a subject must be authorized to access some object in a specific way, and we need to make sure that the requester is not an imposter. The other three patterns complete the definition of the controlled execution domain, where the creation and access to objects are now controlled.
 
-Figure 8.1: Patterns for secure process execution
+<Figures figure="8-1">Patterns for secure process execution</Figures>
 
 The first three patterns come from [Fer02], the last one from [Fer05c].
 
@@ -45,7 +45,7 @@ Divide the VAS into segments that correspond to logical units in the programs. U
 
 Figure 8.2 shows a class diagram of the solution. A Process must have a Descriptor to access a segment in the VAS.
 
-Figure 8.2: Class diagram for the VIRTUAL ADDRESS SPACE ACCESS CONTROL pattern
+<Figures figure="8-2">Class diagram for the VIRTUAL ADDRESS SPACE ACCESS CONTROL pattern</Figures>
 
 ### IMPLEMENTATION
 
@@ -103,7 +103,7 @@ The solution to this problem must resolve the following forces:
 
 Attach a set of descriptors to the process that represent the rights of the process. In Figure 8.3, the class Domain represents domains, and, in conjunction with the Composite pattern [Gam94], describes nested domains. Operation enter() in class Domain lets a Process enter a new Domain. A Domain includes a set of descriptors that define rights for resources.
 
-Figure 8.3: Class diagram for the EXECUTION DOMAIN pattern
+<Figures figure="8-3">Class diagram for the EXECUTION DOMAIN pattern</Figures>
 
 ### CONSEQUENCES
 
@@ -157,13 +157,13 @@ The solution to this problem must resolve the following forces:
 
 Figure 8.4 shows the class diagram of the CONTROLLED EXECUTION DOMAIN pattern. This model combines the AUTHORIZATION (page 74), EXECUTION DOMAIN (page 149) and REIFIED REFERENCE MONITOR (page 100) patterns to let processes operate in an environment with controlled actions based on the rights of their invoker.
 
-Figure 8.4: Class diagram for the CONTROLLED EXECUTION DOMAIN pattern
+<Figures figure="8-4">Class diagram for the CONTROLLED EXECUTION DOMAIN pattern</Figures>
 
 Process execution follows the EXECUTION DOMAIN pattern (page 149): as a process executes it creates one or more Domains. Domains can be recursively composed. The descriptors used in the process’ domains are a subset of the Authorizations that the subject has for some ProtectionObjects (defined by an instance of the AUTHORIZATION pattern). ProtectionObject is a superclass of the abstract Resource class, and ConcreteResource defines a specific resource. Process’ requests go through a ReferenceMonitor that can check the domain descriptors for compliance.
 
 Figure 8.5 (page 154) shows a sequence diagram showing the use of a right after entering a domain. Here x denotes a segment requested by the Process. An instance of the Reference Monitor pattern controls the process requests. This diagram assumes that the descriptors of the domain have been previously set up.
 
-Figure 8.5: Sequence diagram for entering a domain and using a right in that domain
+<Figures figure="8-5">Sequence diagram for entering a domain and using a right in that domain</Figures>
 
 ### IMPLEMENTATION
 
@@ -239,7 +239,7 @@ Select from four basic approaches that differ in their security features:
 
 - One address space per process (Figure 8.6). The supervisor (kernel plus utilities) and each user process get their own address spaces. Using one VAS per process has the following trade-offs:
 
-Figure 8.6: One address space per process
+<Figures figure="8-6">One address space per process</Figures>
 
 - Good process isolation.
 - Some protection against possible illegal actions by a compromised operating system.
@@ -247,7 +247,7 @@ Figure 8.6: One address space per process
 - Sharing is complex (special instructions to cross spaces are needed).
 - Two address spaces per process (Figure 8.7). Each process gets a data and a code (program) virtual address space. Use of two VASs per process has the following trade-offs:
 
-Figure 8.7: Two address spaces per process
+<Figures figure="8-7">Two address spaces per process</Figures>
 
 - Good process isolation.
 - Some protection against possible illegal actions by a compromised operating system.
@@ -255,7 +255,7 @@ Figure 8.7: Two address spaces per process
 - A disadvantage is complex sharing, plus poor address space utilization.
 - One address space per user process, all of them shared with one address space for the operating system (Figure 8.8). The operating system (supervisor) can be shared between all processes. This scheme has the following trade-offs:
 
-Figure 8.8: One address space per user process, all of them shared with one address space for the operating system
+<Figures figure="8-8">One address space per user process, all of them shared with one address space for the operating system</Figures>
 
 - Good process isolation.
 - Good sharing of resources and services.
@@ -263,7 +263,7 @@ Figure 8.8: One address space per user process, all of them shared with one addr
 - The address space available to each user process has been halved.
 - A single-level address space (Figure 8.9). Everything, including files, is mapped to one memory space. Use of a single-level address space has the following trade-offs:
 
-Figure 8.9: A single-level address space
+<Figures figure="8-9">A single-level address space</Figures>
 
 - Good process isolation.
 - Logical simplicity.
